@@ -1,0 +1,45 @@
+//  https://www.hackerrank.com/challenges/cpp-lower-bound/
+
+#include <cmath>
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+  /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    auto num( 0 );
+
+    std::cin >> num;
+    std::cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+
+    vector<int> v( num );
+
+    for( auto x = 0; x < num; ++x ) {   //  Read in vector
+        std::cin >> v[ x ];
+    }
+
+    std::cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+
+    auto queries( 0 );
+
+    std::cin >> queries;
+    std::cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+
+    for( auto x = 0; x < queries; ++x ) {   //  Read in queries and process them
+        std::cin >> num;
+        std::cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+
+        auto searchResult = find( v.begin(), v.end(), num );
+
+        if( searchResult != v.end() ) {
+            std::cout << "Yes " << ( searchResult - v.begin() ) + 1 << "\n";
+        } else {
+            std::cout << "No " << ( std::lower_bound( v.begin(), v.end(), num ) - v.begin() ) + 1 << "\n";
+        }
+    }
+
+  return 0;
+}

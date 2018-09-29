@@ -1,0 +1,17 @@
+# Compiled source
+*.out
+*.o
+*.so
+
+# Packages
+*.7z
+*.gz
+*.zip
+*.iso
+
+# Logs
+*.log
+*.sql
+*.sqlite
+
+# Misc
