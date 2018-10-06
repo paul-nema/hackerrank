@@ -5,7 +5,24 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the breakingRecords function below.
-vector<int> breakingRecords(vector<int> scores) {
+vector<int> breakingRecords(vector<int> &scores) {
+    int lowScore = scores[ 0 ];
+    int highScore = lowScore;
+    int lowRecord = 0;
+    int highRecord = 0;
+
+    // for( auto x: scores ) {
+    for( auto x = 1; x < scores.size(); ++x ) {
+        if( scores[ x ] < lowScore  ) {
+            lowScore = scores[ x ];
+            ++lowRecord;
+        } else if( scores[ x ] > highScore  ) {
+            highScore = scores[ x ];
+            ++highRecord;
+        }
+    }
+
+    return( vector< int >( { highRecord, lowRecord } ) );
 }
 
 int main() {
@@ -28,7 +45,7 @@ int main() {
 
   vector<int> result = breakingRecords(scores);
 
-  for (unsigned long i = 0; i < result.size(); i++) {
+  for (int i = 0; i < result.size(); i++) {
     cout << result[i];
 
     if (i != result.size() - 1) {
