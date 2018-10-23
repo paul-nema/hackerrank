@@ -20,8 +20,12 @@ int beautifulTriplets(int d, const vector<int> &arr) {
                 for( unsigned long z( y + 1 ); z < arr.size(); ++z ) {
                     if( arr[ z ] - arr[ y ] == d ) {    //  second match
                         ++cnt;
+                    } else if( arr[ z ] - arr[ y ] > d ) {
+                        break;
                     }
                 }
+            } else if( arr[ y ] - arr[ x ] > d ) {
+                break;  //  further numbers will be even greater than d
             }
         }
     }
@@ -29,7 +33,6 @@ int beautifulTriplets(int d, const vector<int> &arr) {
     return( cnt );
 }
 
-                        //  cout << "x = " << x << " y = " << y << " z " << z << endl;
 int main() {
   string nd_temp;
   getline(cin, nd_temp);
