@@ -7,9 +7,29 @@ vector<string> split_string(string);
 // Complete the beautifulTriplets function below.
 //  d: an integer to match to determine if value is a beautiful triplet
 //  arr: an array of integers, sorted ascending
-int beautifulTriplets(int d, vector<int> arr) {
+int beautifulTriplets(int d, const vector<int> &arr) {
+    if( arr.size() < 3 ) {
+        return( 0 );
+    }
+
+    auto cnt( 0 );
+
+    for( unsigned long x( 0 ); x < arr.size(); ++x ) {
+        for( unsigned long y( x + 1 ); y < arr.size() - 1; ++y ) {
+            if( arr[ y ] - arr[ x ] == d ) {    //  first match
+                for( unsigned long z( y + 1 ); z < arr.size(); ++z ) {
+                    if( arr[ z ] - arr[ y ] == d ) {    //  second match
+                        ++cnt;
+                    }
+                }
+            }
+        }
+    }
+
+    return( cnt );
 }
 
+                        //  cout << "x = " << x << " y = " << y << " z " << z << endl;
 int main() {
   string nd_temp;
   getline(cin, nd_temp);
