@@ -13,7 +13,6 @@ vector<int> acmTeam( vector<string> topic ) {
     std::map< int, int > teams;
 
     auto maxTopics( 0 );
-    auto numOfWays( 0 );
 
     for( unsigned long x( 0 ); x < topic.size(); ++x ) {
         for( unsigned long y( x + 1 ); y < topic.size(); ++y ) {
@@ -23,17 +22,18 @@ vector<int> acmTeam( vector<string> topic ) {
                 }
             }
 
-            teams[ maxTopics ]++;
+            teams[ maxTopics ]++;   //  count teams
 
             if( maxTopics > result[ 0 ] ) {
-                result[ 0 ]++;  //  max num of topics
+                result[ 0 ] = maxTopics;  //  max num of topics
             }
 
-            maxTopics = 0;
+            maxTopics = 0;  //  reset variable
         }
 
     }
 
+    //  Find the largest key which gives the # of teams
     result[ 1 ] = std::max_element( std::begin( teams ), std::end( teams ),
             [] ( const auto & p1, const auto & p2 ) {
                 return p1.first < p2.first;
