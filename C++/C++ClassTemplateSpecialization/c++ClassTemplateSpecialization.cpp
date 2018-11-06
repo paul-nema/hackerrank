@@ -17,7 +17,7 @@ struct Traits {
 template<>
 std::string Traits< Fruit >::name( int index ) {
     if( index < static_cast<int>(Fruit::apple) || index > static_cast<int>(Fruit::pear) ) {
-        return( "Not Found" );
+        return( "unknown" );
     }
     
     const char* const fruitNm[] = { "apple", "orange", "pear" };
@@ -28,7 +28,7 @@ std::string Traits< Fruit >::name( int index ) {
 template<>
 std::string Traits< Color >::name( int index ) {
     if( index < static_cast<int>(Color::red) || index > static_cast<int>(Color::orange) ) {
-        return( "Not Found" );
+        return( "unknown" );
     }
     
     const char* const colorNm[] = { "red", "green", "orange" };
