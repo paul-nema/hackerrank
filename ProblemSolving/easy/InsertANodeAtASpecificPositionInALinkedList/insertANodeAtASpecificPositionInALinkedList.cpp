@@ -71,23 +71,22 @@ void free_singly_linked_list(SinglyLinkedListNode *node) {
  *
  */
 SinglyLinkedListNode *insertNodeAtPosition( SinglyLinkedListNode *head, int data, int position ) {
-    if( position == 0 ) {
-        SinglyLinkedListNode * const node = new SinglyLinkedListNode( data );
-        node->next = head;
-
-        return( node );
-    }
-
     auto begin( head );
+    auto targetPosition( 0 );
 
-    while( head && position-- != 1 ) {
+    while( head && ++targetPosition < position ) {
         head = head->next;
     }
 
     SinglyLinkedListNode * const node = new SinglyLinkedListNode( data );
 
-    node->next = head->next;
-    head->next = node;
+    if( position == 0 ) {   //  insert at the front
+        node->next = begin;
+        begin = node;
+    } else {
+        node->next = head->next;
+        head->next = node;
+    }
 
     return( begin );
 }
