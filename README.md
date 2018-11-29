@@ -2,7 +2,9 @@
 
 It’s been a bit since I've seriously coded C++.  Decided to refresh my skills in order to get back into the industry.  Happened across hanckerrank.com and decided this is a vehicle to achieve that objective.  Originally, I started with LeetCode but I’ve found HackerRank provides a better learning experience especially the discussion area where you see other REALLY efficient solutions.  I learn a lot by seeing different solutions, the discussions surrounding them, their O(n), etc.
 
-Note: most of my code written for hackerrank is terse and has limited or no error checking.  Its assumed that the input data is clean.  This is about efficiency over error checking.
+My plan is to eventually go back and rewite all my O(n^n) algorithms into something more much more efficient.  To help that process I'm now including my test data, and test scripts if I have them.
+
+Note: most of my code written for hackerrank is terse and has limited or no error checking as hte requirements state the data is clean.  This is about efficiency over error checking.
 
 A good resource for the various competitive hacking web sites is the wiki page
 https://en.wikipedia.org/wiki/Competitive_programming
