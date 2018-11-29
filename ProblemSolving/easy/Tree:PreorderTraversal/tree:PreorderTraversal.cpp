@@ -58,13 +58,8 @@ public:
 
       std::cout << root->data << " ";
 
-      if( root->left ) {    //  recurse left
-          preOrder( root->left );
-      }
-
-      if( root->right ) {   //  recurse right
-          preOrder( root->right );
-      }
+      preOrder( root->left );   //  recurse left
+      preOrder( root->right );  //  recurse right
   }
 
 }; // End of Solution
