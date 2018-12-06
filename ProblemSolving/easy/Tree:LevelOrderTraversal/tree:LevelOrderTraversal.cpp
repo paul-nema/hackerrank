@@ -54,20 +54,18 @@ public:
       nodes.push_back( root );  //  start with the root
 
       while( ! nodes.empty() ) {
-          root = nodes.front(); //  grab the first node
-
-          std::cout << root->data << " ";
-
-          nodes.pop_front();    //  done with node, remove it
+          std::cout << nodes.front()->data << " ";  //  print the first node
 
           //    Add children nodes to the end of the deque if any
-          if( root->left ) {
-              nodes.push_back( root->left );
+          if( nodes.front()->left ) {
+              nodes.push_back( nodes.front()->left );
           }
 
-          if( root->right ) {
-              nodes.push_back( root->right );
+          if( nodes.front()->right ) {
+              nodes.push_back( nodes.front()->right );
           }
+
+          nodes.pop_front();    //  done with node, remove it
       }
   }
 
