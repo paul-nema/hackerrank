@@ -4,37 +4,37 @@
 #include <iostream>
 using namespace std;
 
-void printKMax(int arr[], int n, int k) {
+void printKMax( int arr[], int n, int k ) {
     // Write your code here.
-    deque< int > dq( k );
+    std::deque< int > qu( k );   //  deque of size k init to 0
 
-    for( auto x = 0; x < k; ++x ) {
-        while ( ( ! dq.empty() ) && arr[ x ] >= arr[ dq.back() ] ) {
-            dq.pop_back();
+    auto x{ 0 };
+
+    for( x = 0; x < k; ++x ) {
+        while ( ( ! qu.empty() ) && arr[ x ] >= arr[ qu.back() ] ) {
+            qu.pop_back();  //  get rid of past smaller elements
         }
 
-        dq.push_back( x );
+        qu.push_back( x );
     }
-}
 
-void printKMax1(int arr[], int n, int k) {
-    // Write your code here.
-    auto max = 0;
+    for( ; x < n; ++x ) { 
+        std::cout << arr[ qu.front() ] << " "; 
 
-    for( auto x = 0; x < ( n - k + 1 ); ++x ) {
-        for( auto y = x; y < x + k; ++y ) {
-            if( arr[ y ] > max ) {
-                max = arr[ y ];
-            }
+        while ( ( ! qu.empty() ) && qu.front() <= x - k ) {
+            qu.pop_front(); //  remove elements not in window
         }
 
-        std::cout << max << " ";
+        while ( ( ! qu.empty() ) && arr[ x ] >= arr[ qu.back() ] ) {
+            qu.pop_back(); 
+        }
 
-        max = 0;
-    }
+        qu.push_back( x ); 
+    } 
 
-    std::cout << std::endl;
+    std::cout << arr[ qu.front() ] << std::endl;;  //  print last max element
 }
+
 
 int main() {
 
