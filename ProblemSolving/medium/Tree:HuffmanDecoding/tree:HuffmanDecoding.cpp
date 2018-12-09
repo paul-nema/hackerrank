@@ -93,19 +93,13 @@ typedef struct node
 void decode_huff( node *root, std::string &s ) {
     auto node{ root };
 
-    for( unsigned long x{ 0 }; x <= s.size(); ++x ) {
+    for( auto c: s ) {
+        node = ( c == '0' ) ? node->left : node->right;
+
         if( node->data != '\0' ) {
             std::cout << node->data;
 
-            node = root;    //  reset for next letter
-
-            --x;    //  don't count this node
-        } else {
-            if( s[ x ] == '0' ) {
-                node = node->left;
-            } else {    //  s[ 0 ] = '1'
-                node = node->right;
-            }
+            node = root;    //  reset for the next letter
         }
     }
 
