@@ -1,6 +1,6 @@
 # hackerrank
 
-It’s been a bit since I've seriously coded C++.  Decided to refresh my skills in order to get back into the industry.  Happened across hanckerrank.com and decided this is a vehicle to achieve that objective.  Originally, I started with LeetCode but I’ve found HackerRank provides a better learning experience especially the discussion area where you see other REALLY efficient solutions.  I learn a lot by seeing different solutions, the discussions surrounding them, their O(n), etc.
+It’s been a bit since I've seriously coded C++.  Decided to refresh my skills in order to get back into the industry.  Happened across hanckerrank.com and decided this is a vehicle to achieve that objective.  Originally, I started with LeetCode but I’ve found HackerRank provides a better learning experience especially the discussion area where you see other REALLY efficient solutions.  I learn a lot by reviewing (after submitting my solution) different solutions, the discussions surrounding them, their O(n), etc.
 
 My plan is to eventually go back and rewite all my O(n^n) algorithms into something more much more efficient.  To help that process I'm now including my test data, and test scripts if I have them.
 
