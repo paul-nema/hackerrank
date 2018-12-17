@@ -12,27 +12,30 @@ std::vector< double > runningMedian( vector< int > &a ) {
     *   Write your code here.
     */
     std::vector< double > result( a.size() );
-    std::vector< double > tmp( a.size() );
 
-    for( unsigned long x{ 0 }; x <= a.size(); ++x ) {
-        tmp.clear();
+    auto tmp{ 0 };
 
-        tmp.assign( a.begin(), a.begin() + x + 1 );
-
-        if( tmp.size() == 1 ) {
-            result[ x ] = tmp[ 0 ];
+    for( unsigned long x{ 0 }; x < a.size(); ++x ) {
+        if( x == 0 ) {
+            result[ 0 ] = a[ 0 ];
 
             continue;
         }
 
-        if( tmp.size() > 2 ) {  //  only sort when more than two elements
-            std::sort( tmp.begin(), tmp.end() ) ;
+        for( unsigned long y{ 0 }; y < x; ++y ) {
+            if( a[ y ] > a[ x ] ) {   //  only sort the last value in the set
+                tmp = a[ y ];
+                a[ y ] = a[ x ];
+                a[ x ] = tmp;
+            }
         }
 
-        if( tmp.size() & 1 ) {  //  odd
-            result[ x ] = tmp[ tmp.size() / 2 ];
+        tmp = ( x + 1 ) / 2;
+
+        if( ( x + 1 ) & 1 ) {  //  even
+            result[ x ] = a[ tmp ];
         } else {
-            result[ x ] = ( ( tmp[ tmp.size() / 2 - 1 ] ) + tmp[ tmp.size() / 2 ] ) / 2;
+            result[ x ] = ( ( a[ tmp - 1 ] + a[ tmp ] ) / 1.0 ) / 2;
         }
     }
 
