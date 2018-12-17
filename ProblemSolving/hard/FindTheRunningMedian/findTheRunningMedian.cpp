@@ -14,6 +14,7 @@ std::vector< double > runningMedian( vector< int > &a ) {
     std::vector< double > result( a.size() );
 
     auto tmp{ 0 };
+    unsigned long y{ 0 };
 
     for( unsigned long x{ 0 }; x < a.size(); ++x ) {
         if( x == 0 ) {
@@ -22,7 +23,7 @@ std::vector< double > runningMedian( vector< int > &a ) {
             continue;
         }
 
-        for( unsigned long y{ 0 }; y < x; ++y ) {
+        for( y = 0; y < x; ++y ) {
             if( a[ y ] > a[ x ] ) {   //  only sort the last value in the set
                 tmp = a[ y ];
                 a[ y ] = a[ x ];
@@ -30,9 +31,9 @@ std::vector< double > runningMedian( vector< int > &a ) {
             }
         }
 
-        tmp = ( x + 1 ) / 2;
+        tmp = ( x + 1 ) >> 1;
 
-        if( ( x + 1 ) & 1 ) {  //  even
+        if( ! ( x & 1 ) ) {  //  even
             result[ x ] = a[ tmp ];
         } else {
             result[ x ] = ( ( a[ tmp - 1 ] + a[ tmp ] ) / 1.0 ) / 2;
