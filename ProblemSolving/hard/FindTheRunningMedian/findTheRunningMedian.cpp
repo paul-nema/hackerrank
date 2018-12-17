@@ -13,30 +13,38 @@ std::vector< double > runningMedian( vector< int > &a ) {
     */
     std::vector< double > result( a.size() );
 
-    auto tmp{ 0 };
-    unsigned long y{ 0 };
+    std::priority_queue< int, std::vector< int >, std::greater< int > > minHeap;
+    std::priority_queue< int > maxHeap;
+
+    double medium = a[ 0 ];
 
     for( unsigned long x{ 0 }; x < a.size(); ++x ) {
-        if( x == 0 ) {
-            result[ 0 ] = a[ 0 ];
-
-            continue;
-        }
-
-        for( y = 0; y < x; ++y ) {
-            if( a[ y ] > a[ x ] ) {   //  only sort the last value in the set
-                tmp = a[ y ];
-                a[ y ] = a[ x ];
-                a[ x ] = tmp;
-            }
-        }
-
-        tmp = ( x + 1 ) >> 1;
-
-        if( ! ( x & 1 ) ) {  //  even
-            result[ x ] = a[ tmp ];
+        if( a[ x ] > medium ) {
+            minHeap.push( a[ x ] );
         } else {
-            result[ x ] = ( ( a[ tmp - 1 ] + a[ tmp ] ) / 1.0 ) / 2;
+            maxHeap.push( a[ x ] );
+        }
+
+        if( minHeap.size() > maxHeap.size() + 1 ) {
+            maxHeap.push( minHeap.top() );
+
+            minHeap.pop();
+        }
+
+        if( maxHeap.size() > minHeap.size() + 1 ) {
+            minHeap.push( maxHeap.top() );
+
+            maxHeap.pop();
+        }
+
+        if( minHeap.size() == maxHeap.size() ) {
+            result[ x ] = medium = ( maxHeap.top() + minHeap.top() ) / 2.0;
+
+        } else if( minHeap.size() > maxHeap.size() ) {
+            result[ x ] = medium = static_cast< double >( minHeap.top() );
+
+        } else {
+            result[ x ] = medium = static_cast< double >( maxHeap.top() );
         }
     }
 
