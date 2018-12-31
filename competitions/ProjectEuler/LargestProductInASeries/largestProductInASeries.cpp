@@ -17,8 +17,9 @@ int main() {
     auto N{ 0 };
     auto num{ 0 };  //  this can be dropped but keeping for readability
     auto digit{ '0' };
-    auto product{ 1 };
-    auto maxNum{ 0 };
+
+    unsigned long product{ 1 };
+    unsigned long maxNum{ 0 };
 
     size_t K{ 0 };
 
