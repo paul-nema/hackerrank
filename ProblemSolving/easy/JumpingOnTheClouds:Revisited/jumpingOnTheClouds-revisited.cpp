@@ -9,11 +9,17 @@ vector<string> split_string( string );
 // Complete the jumpingOnClouds function below.
 //  c: an array of integers representing cloud types
 //  k: an integer representing the length of one jump
-int jumpingOnClouds( vector<int> c, int k ) {}
+int jumpingOnClouds( vector<int> c, int k ) {
+    auto energy( 100 ); //  start at 100
+
+    for( unsigned long x{ 0 }; x < c.size(); x += k ) {
+        energy -= c[ x ] == 1 ? 3 : 1;
+    }
+
+    return( energy );
+}
 
 int main() {
-    ofstream fout( getenv( "OUTPUT_PATH" ) );
-
     string nk_temp;
     getline( cin, nk_temp );
 
@@ -38,9 +44,7 @@ int main() {
 
     int result = jumpingOnClouds( c, k );
 
-    fout << result << "\n";
-
-    fout.close();
+    cout << result << "\n";
 
     return 0;
 }
