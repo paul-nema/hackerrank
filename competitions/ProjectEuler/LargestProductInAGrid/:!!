@@ -1,0 +1,95 @@
+#include <algorithm>
+#include <iostream>
+#include <list>
+#include <vector>
+
+using namespace std;
+
+const int gridSize = 20;
+const int numOfNums = 4;
+
+int checkHorizontal( std::list< int > &horizontal, int &total, int val ) {
+    horizontal.push_back( val );
+
+    total *= horizontal.back();
+
+    if( horizontal.size() > numOfNums ) {
+        total /= horizontal.front();
+
+        horizontal.pop_front();
+    }
+
+    return( total );
+}
+
+int checkDown( vector< vector< int > > &grid, int x, int y ) {
+    if( x >= gridSize - numOfNums ) {
+        return( 0 );
+    }
+
+    auto totalVert{ 0 };
+    auto totalDown{ grid[ x ][ y ] * grid[ x + 1 ][ y ] * grid[ x + 2 ][ y ] * grid[ x + 3 ][ y ] };
+
+    if( y < gridSize - numOfNums + 1 ) { 
+        totalVert = grid[ x ][ y ] * grid[ x + 1 ][ y + 1 ] * grid[ x + 2 ][ y + 2 ] * grid[ x + 3 ][ y + 3 ];
+    }
+
+    return( std::max( totalVert, totalDown ) );
+}
+
+int checkUp( vector< vector< int > > &grid, int x, int y ) {
+    if( x < numOfNums - 1 || y >= gridSize - numOfNums + 1 ) {
+        return( 0 );
+    }
+
+    return( grid[ x ][ y ] * grid[ x - 1 ][ y + 1 ] * grid[ x - 2 ][ y + 2 ] * grid[ x - 3 ][ y + 3 ] );
+}
+
+int main() {
+    std::list< int > horizontal;
+
+    auto largest{ 0 };
+    auto total{ 0 };
+    auto horizonTotal{ 1 };
+
+    unsigned long x{ 0 };
+    unsigned long y{ 0 };
+
+    vector< vector< int > > grid( gridSize, vector< int >( gridSize ));
+
+    for ( ; x <  grid.size() ; x++) {   //  Read in the grid
+        for ( y = 0; y < grid[ x ].size() ; y++) {
+            cin >> grid[ x ][ y ];
+        }
+    }
+
+    for( x = 0; x < grid.size(); ++x ) {
+        for( y = 0; y < grid[ x ].size(); ++y ) {
+            if( grid[ x ][ y ] == 0 ) {   //  skip zeros
+                horizontal.clear();
+                horizonTotal = 1;
+
+                continue;
+            }
+
+            if( ( total = checkHorizontal( horizontal, horizonTotal, grid[ x ][ y ] ) ) > largest ) {
+                largest = total;
+            }
+
+            if( ( total = checkDown( grid, x, y ) ) > largest ) {
+                largest = total;
+            }
+
+            if( ( total = checkUp( grid, x, y ) ) > largest ) {
+                largest = total;
+            }
+        }
+
+        horizontal.clear();
+        horizonTotal = 1;
+    }
+
+    std::cout << largest << "\n";
+
+    return 0;
+}
