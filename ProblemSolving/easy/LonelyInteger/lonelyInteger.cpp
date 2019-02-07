@@ -15,7 +15,7 @@ int lonelyinteger( const vector< int > &a ) {
     }
 
     for( auto it = occurance.begin(); it != occurance.end(); ++it ) {
-        if( it->second == 1 ) {
+        if( it->second == 1 ) { //  should be one and only one
             return( it->first );
         }
     }
