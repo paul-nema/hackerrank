@@ -10,13 +10,25 @@ int anagram( std::string &s ) {
         return( -1 );
     }
 
-    std::map< char, int > cnt;
+    std::vector< int > left( 26, 0 );
+    std::vector< int > right( 26, 0 );
 
-    for( char c: s ) {
-        cnt[ c ]++;
+    unsigned long x{ 0 };
+    unsigned long total{ 0 };
+
+    for( ; x < s.size(); ++x ) {
+        if( x < s.size() / 2 ) {    //  divide word in half
+            left[ s[ x ] - 'a' ]++; //  add 1 for each letter
+        } else {
+            right[ s[ x ] - 'a' ]++;    //  add 1 for each letter
+        }
     }
 
-    return( -1 );
+    for( x = 0; x < left.size(); ++x ) {    //  subtract the two vectors
+        total += std::abs( left[ x ] - right[ x ] );
+    }
+
+    return( total / 2 );
 }
 
 
